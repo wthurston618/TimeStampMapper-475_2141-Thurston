@@ -33,7 +33,7 @@ accessFile = open('TimeStampByAccess.txt', 'w')
 modifyFile = open('TimeStampByModify.txt', 'w')
 
 operatingSystem = input('Specify operating system:\n\n1. Windows\n2. Mac/Linux\n\nOperating System:')
-choice = input('What would you like to do?\n\n1. Get All Directories\n2. Get Specific Directory\n\nChoice: ')
+choice = input('What would you like to do?\n\n1. Get all Directories from Root/C:\\n2. Get Specific Directory\n\nChoice: ')
 
 
 if operatingSystem == '1':
@@ -61,16 +61,19 @@ if operatingSystem == '1':
                 output.write( "Access time: %s\n" %accessTime )
                 print ("Modified time: %s" %modifiedTime)
                 output.write( "Modified time: %s\n" %modifiedTime )
-
                 print ("\n\n\n")
                 output.write("\n\n\n")
 
-            for filename in dirs:
-                print(os.path.join(root, filename))
+                createFile.write("%s "%createTime)
+                createFile.write("---> %s\n" %os.path.join(root, filename))
+                accessFile.write("%s "%accessTime)
+                accessFile.write("---> %s\n" %os.path.join(root, filename))
+                modifyFile.write("%s "%modifiedTime)
+                modifyFile.write("---> %s\n" %os.path.join(root, filename))
         
                 
     elif choice == '2':
-        #Recursively go through the specified directory
+      #Recursively go through the specified directory
         for root, dirs, files in os.walk(get_directory() , topdown=False):
             for filename in files:
                 print(os.path.join(root, filename))
@@ -93,12 +96,15 @@ if operatingSystem == '1':
                 output.write( "Access time: %s\n" %accessTime )
                 print ("Modified time: %s" %modifiedTime)
                 output.write( "Modified time: %s\n" %modifiedTime )
-
                 print ("\n\n\n")
                 output.write("\n\n\n")
 
-            for filename in dirs:
-                print(os.path.join(root, filename))
+                createFile.write("%s "%createTime)
+                createFile.write("---> %s\n" %os.path.join(root, filename))
+                accessFile.write("%s "%accessTime)
+                accessFile.write("---> %s\n" %os.path.join(root, filename))
+                modifyFile.write("%s "%modifiedTime)
+                modifyFile.write("---> %s\n" %os.path.join(root, filename))
 
     else:
         print("\n>>>Incorrect option, system exit<<<")
@@ -128,12 +134,15 @@ elif operatingSystem == '2':
                 output.write( "Access time: %s\n" %accessTime )
                 print ("Modified time: %s" %modifiedTime)
                 output.write( "Modified time: %s\n" %modifiedTime )
-
                 print ("\n\n\n")
                 output.write("\n\n\n")
 
-            for filename in dirs:
-                print(os.path.join(root, filename))
+                createFile.write("%s "%createTime)
+                createFile.write("---> %s\n" %os.path.join(root, filename))
+                accessFile.write("%s "%accessTime)
+                accessFile.write("---> %s\n" %os.path.join(root, filename))
+                modifyFile.write("%s "%modifiedTime)
+                modifyFile.write("---> %s\n" %os.path.join(root, filename))
         
                 
     elif choice == '2':
@@ -148,7 +157,6 @@ elif operatingSystem == '2':
                 stinfo = os.stat(os.path.join(root, filename))
 
                 #Modify atime, ctime, and mtime timestamp sting to human-readable date
-                FILE= os.path.join(root, filename)
                 createTime = datetime.datetime.fromtimestamp(int(stinfo.st_ctime)).strftime('%Y-%m-%d %H:%M:%S')
                 accessTime = datetime.datetime.fromtimestamp(int(stinfo.st_atime)).strftime('%Y-%m-%d %H:%M:%S')
                 modifiedTime = datetime.datetime.fromtimestamp(int(stinfo.st_mtime)).strftime('%Y-%m-%d %H:%M:%S')
